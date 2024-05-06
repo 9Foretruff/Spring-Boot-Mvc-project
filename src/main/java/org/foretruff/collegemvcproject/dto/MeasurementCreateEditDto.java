@@ -26,23 +26,23 @@ public class MeasurementCreateEditDto {
     LocalDate measurementDate;
 
     @NotNull(message = "Pressure cannot be null")
-    @DecimalMin(value = "0.00", inclusive = true, message = "Pressure must be at least 0.00")
-    @DecimalMax(value = "2000.00", inclusive = true, message = "Pressure cannot exceed 2000.00")
+    @DecimalMin(value = "-999.99", inclusive = true, message = "Pressure must be at least -999.99")
+    @DecimalMax(value = "999.99", inclusive = true, message = "Pressure cannot exceed 999.99")
     BigDecimal pressure;
 
     @NotNull(message = "Temperature cannot be null")
-    @DecimalMin(value = "-100.00", inclusive = true, message = "Temperature must be at least -100.00")
-    @DecimalMax(value = "100.00", inclusive = true, message = "Temperature cannot exceed 100.00")
+    @DecimalMin(value = "-999.99", inclusive = true, message = "Temperature must be at least -999.99")
+    @DecimalMax(value = "999.99", inclusive = true, message = "Temperature cannot exceed 999.99")
     BigDecimal temperature;
 
     @NotNull(message = "Humidity cannot be null")
-    @DecimalMin(value = "0.00", inclusive = true, message = "Humidity must be at least 0.00")
-    @DecimalMax(value = "100.00", inclusive = true, message = "Humidity cannot exceed 100.00")
+    @DecimalMin(value = "-999.99", inclusive = true, message = "Humidity must be at least -999.99")
+    @DecimalMax(value = "999.99", inclusive = true, message = "Humidity cannot exceed 999.99")
     BigDecimal humidity;
 
     @NotNull(message = "Wind speed cannot be null")
     @DecimalMin(value = "0.00", inclusive = true, message = "Wind speed must be at least 0.00")
-    @DecimalMax(value = "100.00", inclusive = true, message = "Wind speed cannot exceed 100.00")
+    @DecimalMax(value = "999.99", inclusive = true, message = "Wind speed cannot exceed 999.99")
     BigDecimal windSpeed;
 
     @NotBlank(message = "Cloud cover cannot be blank")

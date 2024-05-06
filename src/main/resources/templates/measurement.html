@@ -4,51 +4,105 @@
     <meta charset="UTF-8">
     <title>Measurement</title>
     <link rel="icon" href="/img/icon.png">
+    <link rel="stylesheet" type="text/css" href="/css/measurements.css">
 </head>
 <body>
 
-<form th:action="@{/measurements/{measurementId}/update(measurementId=${measurement.id})}" enctype="multipart/form-data"
-      method="post" th:object="${measurement}">
-    <label for="locationCode"> Location Code
-        <input id="locationCode" type="text" name="locationCode" th:value="*{locationCode}">
-    </label><br>
-    <label for="employeeCode"> Employee Code
-        <input id="employeeCode" type="text" name="employeeCode" th:value="*{employeeCode}">
-    </label><br>
-    <label for="measurementDate"> Measurement Date
-        <input id="measurementDate" type="date" name="measurementDate" th:value="*{measurementDate}">
-    </label><br>
-    <label for="pressure"> Pressure
-        <input id="pressure" type="number" name="pressure" th:value="*{pressure}">
-    </label><br>
-    <label for="temperature"> Temperature
-        <input id="temperature" type="number" name="temperature" th:value="*{temperature}">
-    </label><br>
-    <label for="humidity"> Humidity
-        <input id="humidity" type="number" name="humidity" th:value="*{humidity}">
-    </label><br>
-    <label for="windSpeed"> Wind Speed
-        <input id="windSpeed" type="number" name="windSpeed" th:value="*{windSpeed}">
-    </label><br>
-    <label for="cloudCover"> Cloud Cover
-        <input id="cloudCover" type="text" name="cloudCover" th:value="*{cloudCover}">
-    </label><br>
-    <img th:if="${imageUrl != null}" th:src="${imageUrl}" alt="Measurement Photo">
+<div class="container" style="width: auto">
+    <form th:action="@{/measurements/{measurementId}/update(measurementId=${measurement.id})}"
+          enctype="multipart/form-data"
+          method="post" th:object="${measurement}" class="measurement-form">
 
-    <br>
-    <label for="photo"> Photo
-        <input id="photo" type="file" name="photo">
-    </label><br>
-    <button type="submit">Update</button>
-</form>
+        <br>
+        <h1 class="container,neon-title"> Edit Menu</h1>
 
-<div th:if="${errors}">
-    <p style="color: red" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+        <div class="input-container">
+            <label for="locationCode"> Location Code
+                <input id="locationCode" type="text" name="locationCode" th:value="*{locationCode}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="employeeCode"> Employee Code
+                <input id="employeeCode" type="text" name="employeeCode" th:value="*{employeeCode}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="measurementDate"> Measurement Date
+                <input id="measurementDate" type="date" name="measurementDate" th:value="*{measurementDate}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="pressure"> Pressure
+                <input id="pressure" type="number" name="pressure" th:value="*{pressure}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="temperature"> Temperature
+                <input id="temperature" type="number" name="temperature" th:value="*{temperature}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="humidity"> Humidity
+                <input id="humidity" type="number" name="humidity" th:value="*{humidity}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="windSpeed"> Wind Speed
+                <input id="windSpeed" type="number" name="windSpeed" th:value="*{windSpeed}">
+            </label>
+        </div>
+        <div class="input-container">
+            <label for="cloudCover"> Cloud Cover
+                <input id="cloudCover" type="text" name="cloudCover" th:value="*{cloudCover}">
+            </label>
+        </div>
+        <div class="input-container">
+            <img th:if="${imageUrl != null and not #strings.isEmpty(imageUrl)}" th:src="${imageUrl}"
+                 alt="Measurement Photo">
+        </div>
+        <div class="input-container">
+            <label for="photo"> Photo
+                <input id="photo" type="file" name="photo">
+            </label>
+        </div>
+        <div class="input-container">
+            <button type="submit">Update</button>
+        </div>
+    </form>
+
+    <div th:if="${errors}" class="error-container">
+        <p th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+    </div>
+
+    <form th:action="@{/measurements/{measurementId}/delete(measurementId=${measurement.id})}" method="post"
+          class="remove-form">
+        <button type="submit">Remove</button>
+    </form>
+
+    <form th:action="@{/measurements}" method="get">
+        <button type="submit">Go Back</button>
+    </form>
 </div>
 
-<form th:action="@{/measurements/{measurementId}/delete(measurementId=${measurement.id})}" method="post">
-    <button type="submit">Remove</button>
-</form>
+<div class="social-media-window">
+    <div class="social-media-bar">
+        <a href="https://www.linkedin.com/in/rokitko" target="_blank">
+            <img src="img/linkenIn-logo.png"
+                 alt="linkedIn">
+        </a>
+        <a href="https://github.com/9Foretruff" target="_blank">
+            <img src="img/gitHub-logo.png" alt="gitHub">
+        </a>
+        <a href="https://www.instagram.com/foretruff/" target="_blank">
+            <img src="img/instagram-logo.png"
+                 alt="instagram">
+        </a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Made by Rokitko Maksim</p>
+</div>
 
 </body>
 </html>

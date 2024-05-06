@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-    <h1 class="neon-title">Weather App</h1>
+    <h1 class="neon-title">Weather Audit App</h1>
 
     <form action="/measurements" method="get" class="input-container">
         <label for="locationCode">Location code:
@@ -24,9 +24,21 @@
         <button type="submit">Filter</button>
     </form>
 
+    <br>
+    <br>
+
+    <form th:action="@{/measurements/add}" method="get">
+        <button type="submit">Add</button>
+    </form>
+
     <div class="measurement-item" th:each="measurement : ${measurements.content}">
-        <a th:href="@{'/measurements/' + ${measurement.id}}" th:text="|${measurement.id}. ${measurement.measurementDate}|">User</a>
+        <a th:href="@{'/measurements/' + ${measurement.id}}"
+           th:text="|${measurement.id}. ${measurement.measurementDate}|"
+           style="font-family: 'Arial', sans-serif; font-size: 25px; color: #333; text-decoration: none;">
+            Measurement
+        </a>
     </div>
+
 </div>
 
 <br>
@@ -41,8 +53,10 @@
         <li th:class="${currentPage == 0 ? 'disabled' : ''}">
             <a th:href="@{/measurements(page=${currentPage - 1}, size=${measurements.metadata.size})}">&lsaquo;</a>
         </li>
-        <li th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageItem == currentPage ? 'active' : ''}">
-            <a th:href="@{/measurements(page=${pageItem}, size=${measurements.metadata.size})}" th:text="${pageItem + 1}">1</a>
+        <li th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}"
+            th:class="${pageItem == currentPage ? 'active' : ''}">
+            <a th:href="@{/measurements(page=${pageItem}, size=${measurements.metadata.size})}"
+               th:text="${pageItem + 1}">1</a>
         </li>
         <li th:class="${currentPage == totalPages - 1 ? 'disabled' : ''}">
             <a th:href="@{/measurements(page=${currentPage + 1}, size=${measurements.metadata.size})}">&rsaquo;</a>
@@ -51,6 +65,26 @@
             <a th:href="@{/measurements(page=${totalPages - 1}, size=${measurements.metadata.size})}">&raquo;</a>
         </li>
     </ul>
+</div>
+
+<div class="social-media-window">
+    <div class="social-media-bar">
+        <a href="https://www.linkedin.com/in/rokitko" target="_blank">
+            <img src="img/linkenIn-logo.png"
+                 alt="linkedIn">
+        </a>
+        <a href="https://github.com/9Foretruff" target="_blank">
+            <img src="img/gitHub-logo.png" alt="gitHub">
+        </a>
+        <a href="https://www.instagram.com/foretruff/" target="_blank">
+            <img src="img/instagram-logo.png"
+                 alt="instagram">
+        </a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Made by Rokitko Maksim</p>
 </div>
 
 </body>

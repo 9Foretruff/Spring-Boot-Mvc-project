@@ -28,6 +28,7 @@ public class MeasurementService {
     private final MeasurementReadMapper measurementReadMapper;
     private final MeasurementCreateEditMapper measurementCreateEditMapper;
 
+    @Transactional
     public Page<MeasurementReadDto> findAll(MeasurementFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.locationCode(), measurement.locationCode::containsIgnoreCase)
