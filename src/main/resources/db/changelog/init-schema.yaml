@@ -1,0 +1,78 @@
+databaseChangeLog:
+  - changeSet:
+      id: foretruff-create-schema
+      author: foretruff
+      changes:
+        - sql:
+            splitStatements: true
+            sql: CREATE SCHEMA IF NOT EXISTS prod;
+
+  - changeSet:
+      id: foretruff-create-measurements-table
+      author: foretruff
+      context: prod
+      changes:
+        - createTable:
+            tableName: measurements
+            schemaName: prod
+            columns:
+              - column:
+                  name: id
+                  type: SERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: location_code
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_code
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: measurement_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pressure
+                  type: DECIMAL(5, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: temperature
+                  type: DECIMAL(5, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: humidity
+                  type: DECIMAL(5, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: wind_speed
+                  type: DECIMAL(5, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cloud_cover
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo
+                  type: BYTEA
+                  constraints:
+                    nullable: true
+  - changeSet:
+      id: foretruff-load-measurements-data
+      author: foretruff
+      context: prod
+      changes:
+        - sqlFile:
+            path: data.sql
+            stripComments: true
+            relativeToChangelogFile: true

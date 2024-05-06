@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Measurements</title>
+    <link rel="icon" href="/img/icon.png">
+    <link rel="stylesheet" type="text/css" href="/css/measurements.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="neon-title">Weather App</h1>
+
+    <form action="/measurements" method="get" class="input-container">
+        <label for="locationCode">Location code:
+            <input id="locationCode" type="text" name="locationCode" th:value="${filter.locationCode()}">
+        </label>
+        <label for="employeeCode">Employee code:
+            <input id="employeeCode" type="text" name="employeeCode" th:value="${filter.employeeCode()}">
+        </label>
+        <label for="measurementDate">Measurement date:
+            <input id="measurementDate" type="date" name="measurementDate" th:value="${filter.measurementDate()}">
+        </label>
+        <button type="submit">Filter</button>
+    </form>
+
+    <div class="measurement-item" th:each="measurement : ${measurements.content}">
+        <a th:href="@{'/measurements/' + ${measurement.id}}" th:text="|${measurement.id}. ${measurement.measurementDate}|">User</a>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div th:if="${totalPages > 1}" class="pagination-container">
+    <ul class="pagination">
+        <li th:class="${currentPage == 0 ? 'disabled' : ''}">
+            <a th:href="@{/measurements(page=0, size=${measurements.metadata.size})}">&laquo;</a>
+        </li>
+        <li th:class="${currentPage == 0 ? 'disabled' : ''}">
+            <a th:href="@{/measurements(page=${currentPage - 1}, size=${measurements.metadata.size})}">&lsaquo;</a>
+        </li>
+        <li th:each="pageItem : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageItem == currentPage ? 'active' : ''}">
+            <a th:href="@{/measurements(page=${pageItem}, size=${measurements.metadata.size})}" th:text="${pageItem + 1}">1</a>
+        </li>
+        <li th:class="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+            <a th:href="@{/measurements(page=${currentPage + 1}, size=${measurements.metadata.size})}">&rsaquo;</a>
+        </li>
+        <li th:class="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+            <a th:href="@{/measurements(page=${totalPages - 1}, size=${measurements.metadata.size})}">&raquo;</a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

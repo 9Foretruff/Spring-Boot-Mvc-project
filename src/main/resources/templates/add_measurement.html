@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create measurement</title>
+    <link rel="icon" href="/img/icon.png">
+</head>
+<body>
+
+<form th:action="@{/measurements}" enctype="multipart/form-data" method="post" th:object="${measurement}">
+    <label for="locationCode"> Location Code
+        <input id="locationCode" type="text" name="locationCode" th:value="*{locationCode}">
+    </label><br>
+    <label for="employeeCode"> Employee Code
+        <input id="employeeCode" type="text" name="employeeCode" th:value="*{employeeCode}">
+    </label><br>
+    <label for="measurementDate"> Measurement Date
+        <input id="measurementDate" type="date" name="measurementDate" th:value="*{measurementDate}">
+    </label><br>
+    <label for="pressure"> Pressure
+        <input id="pressure" type="number" name="pressure" th:value="*{pressure}">
+    </label><br>
+    <label for="temperature"> Temperature
+        <input id="temperature" type="number" name="temperature" th:value="*{temperature}">
+    </label><br>
+    <label for="humidity"> Humidity
+        <input id="humidity" type="number" name="humidity" th:value="*{humidity}">
+    </label><br>
+    <label for="windSpeed"> Wind Speed
+        <input id="windSpeed" type="number" name="windSpeed" th:value="*{windSpeed}">
+    </label><br>
+    <label for="cloudCover"> Cloud Cover
+        <input id="cloudCover" type="text" name="cloudCover" th:value="*{cloudCover}">
+    </label><br>
+    <label for="photo"> Image
+        <input id="photo" type="file" name="photo">
+    </label><br>
+    <button type="submit">Add</button>
+</form>
+
+<div th:if="${errors}">
+    <p style="color: red" th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message</p>
+</div>
+
+</body>
+</html>
